@@ -1,6 +1,14 @@
 version: '3.3'
 
 services:
+  current:
+    image: anthraxbogdan/demo_web_app:${GIT_SHA}
+    build:
+      context: .
+      args:
+        PREPARE_DATABASE: "true"
+        WAIT_FOR_POSTGRES: "false"
+
   latest:
     image: anthraxbogdan/demo_web_app:latest
     build:
