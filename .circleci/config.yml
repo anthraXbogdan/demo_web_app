@@ -5,7 +5,8 @@ jobs:
     docker:
       - image: docker:20.10.14-git
     working_directory: /app
-
+    environment:
+      - COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
     steps:
       - checkout
       - setup_remote_docker
@@ -16,12 +17,8 @@ jobs:
             apk add --no-cache bash
             apk add docker docker-compose
       - run:
-          name: Logging Docker and Application information
-          command: |
-            set -x
-            docker -v
-            docker-compose -v
-            ls -l
+          name: Preparing the environment
+          commmand: ./scripts/setup-env.sh
       - run:
-          name: Testing the Docker installation
-          command: docker container run hello-world
+          name: Running the test suite
+          command: ./scripts/run-specs.sh
