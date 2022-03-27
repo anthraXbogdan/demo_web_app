@@ -30,7 +30,7 @@ jobs:
           command: |
             set -e
             export COMPOSE_FILE=docker-compose.build.yml
-            export GIT_SHA='git rev-parse HEAD'
+            export GIT_SHA=`git rev-parse HEAD`
             docker-compose build --pull
             docker-compose push
          
