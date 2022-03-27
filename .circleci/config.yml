@@ -14,7 +14,7 @@ jobs:
           command: |
             set -x
             apk add --no-cache bash
-            apk add apk add docker docker-compose
+            apk add docker docker-compose
       - run:
           name: Logging Docker and Application information
           command: |
