@@ -13,8 +13,8 @@ jobs:
           name: Installing dependencies
           command: |
             set -x
-            apk add --no-cache --no-progress bash py-pip
-            pip install --quiet docker-compose
+            apk add --no-cache bash
+            apk add apk add docker docker-compose
       - run:
           name: Logging Docker and Application information
           command: |
