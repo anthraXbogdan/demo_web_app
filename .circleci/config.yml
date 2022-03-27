@@ -10,18 +10,18 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Installing dependencies
-          command: |
-            set -x
-            apk add --no-cache bash
-            apk add docker docker-compose
-      - run:
-          name: Preparing the environment
-          command: ./scripts/setup-env.sh
-      - run:
-          name: Running the test suite
-          command: ./scripts/run-specs.sh
+      # - run:
+      #     name: Installing dependencies
+      #     command: |
+      #       set -x
+      #       apk add --no-cache bash
+      #       apk add docker docker-compose
+      # - run:
+      #     name: Preparing the environment
+      #     command: ./scripts/setup-env.sh
+      # - run:
+      #     name: Running the test suite
+      #     command: ./scripts/run-specs.sh
       - run:
           name: Signing in to Docker Hub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
