@@ -5,8 +5,7 @@ jobs:
     docker:
       - image: docker:20.10.14-git
     working_directory: /app
-    environment:
-      - COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
+    
     steps:
       - checkout
       - setup_remote_docker
