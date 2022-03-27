@@ -27,10 +27,10 @@ jobs:
           command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run:
           name: Building and pushing images
-          command: |
+          command:
             set -e
-            COMPOSE_FILE=docker-compose.build.yml
-            GIT_SHA='git rev-parse HEAD'
+            export COMPOSE_FILE=docker-compose.build.yml
+            export GIT_SHA='git rev-parse HEAD'
             docker-compose build --pull
             docker-compose push
          
