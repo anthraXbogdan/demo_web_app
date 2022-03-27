@@ -29,7 +29,6 @@ jobs:
           name: Building and pushing images
           command:
             set -e
-            GIT_SHA='git rev-parse HEAD'
             docker-compose build --pull
             docker-compose push
          
