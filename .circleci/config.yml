@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: docker:17.12.0-ce-git
+      - image: docker:20.10.14-git
     working_directory: /app
 
     steps:
