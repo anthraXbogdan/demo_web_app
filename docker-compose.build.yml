@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   current:
-    image: jfahrer/demo_web_app:${GIT_SHA}
+    image: anthraxbogdan/demo_web_app:${GIT_SHA}
     build:
       context: .
       args:
@@ -10,7 +10,7 @@ services:
         WAIT_FOR_POSTGRES: "false"
 
   latest:
-    image: jfahrer/demo_web_app:latest
+    image: anthraxbogdan/demo_web_app:latest
     build:
       context: .
       args:
@@ -18,7 +18,7 @@ services:
         WAIT_FOR_POSTGRES: "false"
 
   wait_for_pg:
-    image: jfahrer/demo_web_app:wait_for_pg
+    image: anthraxbogdan/demo_web_app:wait_for_pg
     build:
       context: .
       args:

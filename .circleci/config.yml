@@ -21,3 +21,15 @@ jobs:
       - run:
           name: Running the test suite
           command: ./scripts/run-specs.sh
+      - run:
+          name: Signing in to Docker Hub
+          command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run:
+          name: Building and pushing images
+          command:
+            set -e
+            export COMPOSE_FILE=docker-compose.build.yml
+            export GIT_SHA='git rev-parse HEAD'
+            docker-compose build --pull
+            docker-compose push
+         
