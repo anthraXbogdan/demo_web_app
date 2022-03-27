@@ -6,29 +6,31 @@ jobs:
       - image: docker:20.10.14-git
     working_directory: /app
     environment:
-      COMPOSE_FILE: docker-compose.build.yml
+      COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
     steps:
       - checkout
       - setup_remote_docker
-      # - run:
-      #     name: Installing dependencies
-      #     command: |
-      #       set -x
-      #       apk add --no-cache bash
-      #       apk add docker docker-compose
-      # - run:
-      #     name: Preparing the environment
-      #     command: ./scripts/setup-env.sh
-      # - run:
-      #     name: Running the test suite
-      #     command: ./scripts/run-specs.sh
+      - run:
+          name: Installing dependencies
+          command: |
+            set -x
+            apk add --no-cache bash
+            apk add docker docker-compose
+      - run:
+          name: Preparing the environment
+          command: ./scripts/setup-env.sh
+      - run:
+          name: Running the test suite
+          command: ./scripts/run-specs.sh
       - run:
           name: Signing in to Docker Hub
           command: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - run:
           name: Building and pushing images
-          command:
+          command: |
             set -e
+            COMPOSE_FILE=docker-compose.build.yml
+            GIT_SHA='git rev-parse HEAD'
             docker-compose build --pull
             docker-compose push
          
