@@ -24,4 +24,4 @@ jobs:
             ls -l
       - run:
           name: Testing the Docker installation
-          command: docker container run hell-world
+          command: docker container run hello-world
