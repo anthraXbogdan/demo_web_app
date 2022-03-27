@@ -1,11 +1,11 @@
----
+version: 2.1
+
 jobs:
   build:
     docker:
       - image: docker:17.12.0-ce-git
     working_directory: /app
-    environment:
-      - COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
+
     steps:
       - checkout
       - setup_remote_docker
@@ -16,21 +16,12 @@ jobs:
             apk add --no-cache --no-progress bash py-pip
             pip install --quiet docker-compose
       - run:
-          name: Preparing the environment
-          command: ./scripts/setup-env.sh
-      - run:
-          name: Running the test suite
-          command: ./scripts/run-specs.sh
-      - run:
-          name: Signing in to Docker Hub
-          command: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run:
-          name: Building and pushing images
+          name: Logging Docker and Application information
           command: |
-            set -e
-            export COMPOSE_FILE=docker-compose.build.yml
-            export GIT_SHA=`git rev-parse HEAD`
-            docker-compose build --pull
-            docker-compose push
-      - store_artifacts:
-          path: /tmp/artifacts
+            set -x
+            docker -v
+            docker-compose -v
+            ls -l
+      - run:
+          name: Testing the Docker installation
+          command: docker container run hell-world
