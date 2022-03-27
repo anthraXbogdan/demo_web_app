@@ -6,7 +6,7 @@ jobs:
       - image: docker:20.10.14-git
     working_directory: /app
     environment:
-      COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
+      COMPOSE_FILE: docker-compose.build.yml
     steps:
       - checkout
       - setup_remote_docker
@@ -29,7 +29,6 @@ jobs:
           name: Building and pushing images
           command:
             set -e
-            COMPOSE_FILE=docker-compose.build.yml
             GIT_SHA='git rev-parse HEAD'
             docker-compose build --pull
             docker-compose push
