@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: docker:20.10.14-git
     working_directory: /app
-    
+
     steps:
       - checkout
       - setup_remote_docker
@@ -17,7 +17,7 @@ jobs:
             apk add docker docker-compose
       - run:
           name: Preparing the environment
-          commmand: ./scripts/setup-env.sh
+          command: ./scripts/setup-env.sh
       - run:
           name: Running the test suite
           command: ./scripts/run-specs.sh
